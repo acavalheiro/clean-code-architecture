@@ -6,9 +6,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "001-Domain", "001-Domain", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCodeArchitecture.Domain", "CleanCodeArchitecture.Domain\CleanCodeArchitecture.Domain.csproj", "{B93E9315-892F-4FB4-8F74-55F535E4ADEE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{C07BC8C0-BA1C-4A93-99B3-39772B5D3DB8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "002-Application", "002-Application", "{C07BC8C0-BA1C-4A93-99B3-39772B5D3DB8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCodeArchitecture.Application", "CleanCodeArchitecture.Application\CleanCodeArchitecture.Application.csproj", "{F958D204-61B8-4E8B-8F5A-53A9AB702659}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "999-UnitTesting", "999-UnitTesting", "{8A9D9CF6-62BD-469F-80EE-02E99938E8E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanCodeArchitecture.Application.Tests", "CleanCodeArchitecture.Application.Tests\CleanCodeArchitecture.Application.Tests.csproj", "{1EB7334F-D8C0-4431-9437-DF0596E52584}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,9 +32,14 @@ Global
 		{F958D204-61B8-4E8B-8F5A-53A9AB702659}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F958D204-61B8-4E8B-8F5A-53A9AB702659}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F958D204-61B8-4E8B-8F5A-53A9AB702659}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB7334F-D8C0-4431-9437-DF0596E52584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB7334F-D8C0-4431-9437-DF0596E52584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB7334F-D8C0-4431-9437-DF0596E52584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB7334F-D8C0-4431-9437-DF0596E52584}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B93E9315-892F-4FB4-8F74-55F535E4ADEE} = {5B8D172B-0E50-43A3-944D-F30A06ED5EAB}
 		{F958D204-61B8-4E8B-8F5A-53A9AB702659} = {C07BC8C0-BA1C-4A93-99B3-39772B5D3DB8}
+		{1EB7334F-D8C0-4431-9437-DF0596E52584} = {8A9D9CF6-62BD-469F-80EE-02E99938E8E2}
 	EndGlobalSection
 EndGlobal
