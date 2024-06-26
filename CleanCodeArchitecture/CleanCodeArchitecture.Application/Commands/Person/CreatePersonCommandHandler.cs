@@ -6,7 +6,7 @@ using MediatR;
 
 namespace CleanCodeArchitecture.Application.Commands.Person;
 
-public class CreatePersonCommandHandler : ICommandHandler<CreatePersonCommand, BaseResponse<Domain.Entities.Person>>
+public class CreatePersonCommandHandler : ICommandHandler<CreatePersonCommand, Domain.Entities.Person>
 {
     private readonly IPersonRepository _personRepository;
 
@@ -17,7 +17,7 @@ public class CreatePersonCommandHandler : ICommandHandler<CreatePersonCommand, B
 
 
 
-    public async Task<BaseResponse<Domain.Entities.Person>> Handle(CreatePersonCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Domain.Entities.Person>> Handle(CreatePersonCommand request, CancellationToken cancellationToken)
     {
 
         Domain.Entities.Person person = new()
@@ -30,7 +30,7 @@ public class CreatePersonCommandHandler : ICommandHandler<CreatePersonCommand, B
 
         await _personRepository.AddAsync(person);
         //return new Domain.Entities.Person();
-        return new ValidationResponse<Domain.Entities.Person>() { Data = person };
+        return new Result<Domain.Entities.Person>() { Data = person };
     }
 
 

@@ -6,8 +6,8 @@ using MediatR;
 namespace CleanCodeArchitecture.Application.Core.PipelineBehavior;
 
 public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : class, ICommand<TResponse> 
-    where TResponse : BaseResponse
+    where TRequest : class, ICommand<TResponse>
+    where TResponse : Result, new()
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
     public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators) => _validators = validators;
@@ -26,32 +26,7 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
             
         if (errorsDictionary.Any())
         {
-            //TResponse.
-           //return new BaseRe.
-             //return TResponse { Errors = errorsDictionary.Select(x => x.ErrorMessage) };
-        }
-        return await next();
-    }
-
-
-    public async Task<BaseResponse<TResponse>> Handle(TRequest request, RequestHandlerDelegate<BaseResponse<TResponse>> next, CancellationToken cancellationToken)
-    {
-        if (!_validators.Any())
-        {
-            return await next();
-        }
-        var context = new ValidationContext<TRequest>(request);
-
-
-        var errorsDictionary = _validators
-            .Select(x => x.Validate(context))
-            .SelectMany(x => x.Errors);
-
-        if (errorsDictionary.Any())
-        {
-            //TResponse.
-            //return new BaseRe.
-            return new BaseResponse<TResponse>() { Errors = errorsDictionary.Select(x => x.ErrorMessage) };
+            return new TResponse() { Errors = errorsDictionary.Select(x => x.ErrorMessage) };
         }
         return await next();
     }

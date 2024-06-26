@@ -36,7 +36,7 @@ public class CreatePersonCommandHandlerTest
     }
     
     [Test]
-    public async Task METHOD()
+    public async Task CreatePersonCommand_WhenCalled_ReturnsValidationError()
     {
         // Arrange
         var mediator = this._serviceProvider.GetRequiredService<IMediator>();
@@ -47,10 +47,40 @@ public class CreatePersonCommandHandlerTest
         var response = await mediator.Send(query);
 
         // Assert
-        // TODO: Validate the Result
+        
+
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response.Errors, Is.Not.Null);
+        Assert.That(response.Errors.Contains("First name is required."));
+        Assert.That(response.Errors.Contains("Last name is required."));
+        Assert.That(response.Errors.Contains("Email is required."));
+        Assert.That(response.Errors.Contains("Email is not valid."));
+        Assert.That(response.Errors.Contains("Date of birth should be higher than today."));
+
+    }
+
+    [Test]
+    public async Task CreatePersonCommand_WhenCalled_CreatePerson()
+    {
+        // Arrange
+        var mediator = this._serviceProvider.GetRequiredService<IMediator>();
+
+        this._personRepositoryMock.Setup(x => x.AddAsync(It.IsAny<Domain.Entities.Person>())).Returns(Task.FromResult(new Domain.Entities.Person()));
+
+        var query = new CreatePersonCommand("André", "Cavalheiro", "a@a.pt", new DateOnly(1987,11,27));
+
+        // Act
+        var response = await mediator.Send(query);
+
+        // Assert
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response.Data,Is.TypeOf<Domain.Entities.Person>());
+
+
+
     }
     [TearDown]
-    public void Dipose()
+    public void Dispose()
     {
         this._serviceProvider.Dispose();
     }

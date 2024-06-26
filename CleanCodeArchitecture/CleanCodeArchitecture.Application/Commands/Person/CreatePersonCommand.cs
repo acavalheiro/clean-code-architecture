@@ -4,4 +4,4 @@ using MediatR;
 
 namespace CleanCodeArchitecture.Application.Commands.Person;
 
-public record CreatePersonCommand(string FirstName, string LastName, string Email, DateOnly? DateOfBirth) : ICommand<BaseResponse<Domain.Entities.Person>>;
+public record CreatePersonCommand(string FirstName, string LastName, string Email, DateOnly? DateOfBirth) : ICommand<Result<Domain.Entities.Person>>;

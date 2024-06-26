@@ -3,8 +3,7 @@ using MediatR;
 
 namespace CleanCodeArchitecture.Domain.Core.Commands;
 
-public interface ICommandHandler<in TCommand, TResponse> : IRequestHandler<TCommand, TResponse>
-    where TCommand : ICommand<TResponse>
-// where TResponse : BaseResponse
+public interface ICommandHandler<in TCommand, TResponse> : IRequestHandler<TCommand, Result<TResponse>>
+    where TCommand : ICommand<Result<TResponse>>
 {
 }
