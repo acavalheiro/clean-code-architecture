@@ -11,6 +11,7 @@ public static class DependencyInjections
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CleanCodeArchitecture.Application.DependencyInjections).Assembly));
         
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
         services.AddValidatorsFromAssembly(typeof(CleanCodeArchitecture.Application.DependencyInjections).Assembly);

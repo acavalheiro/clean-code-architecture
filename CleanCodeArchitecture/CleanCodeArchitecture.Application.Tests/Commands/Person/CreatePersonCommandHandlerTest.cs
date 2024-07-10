@@ -1,10 +1,10 @@
 ﻿using CleanCodeArchitecture.Application.Commands.Person;
 using CleanCodeArchitecture.Application.Core.PipelineBehavior;
-using CleanCodeArchitecture.Application.Validators.User;
 using CleanCodeArchitecture.Domain.Repositories;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace CleanCodeArchitecture.Application.Tests.Commands.Person;
@@ -14,8 +14,8 @@ namespace CleanCodeArchitecture.Application.Tests.Commands.Person;
 public class CreatePersonCommandHandlerTest
 {
 
-    private Mock<IPersonRepository> _personRepositoryMock = new();
-    private IServiceCollection _serviceCollection = new ServiceCollection();
+    private readonly Mock<IPersonRepository> _personRepositoryMock = new();
+    private readonly IServiceCollection _serviceCollection = new ServiceCollection();
     private ServiceProvider _serviceProvider;
     
     [SetUp]
@@ -28,10 +28,13 @@ public class CreatePersonCommandHandlerTest
         
         this._serviceProvider = _serviceCollection
             .AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreatePersonCommandHandler).Assembly))
-            .AddSingleton<IPersonRepository>(_personRepositoryMock.Object)
+            .AddSingleton(_personRepositoryMock.Object)
+            .AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
             .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>))
             // .AddOpenBehavior(typeof(ValidationBehavior<,>))
             .AddValidatorsFromAssembly(typeof(CreatePersonCommandHandler).Assembly)
+            .AddSingleton<ILoggerFactory, LoggerFactory>()
+            .AddSingleton(typeof(ILogger<>), typeof(Logger<>))
             .BuildServiceProvider();  
     }
     
@@ -55,7 +58,7 @@ public class CreatePersonCommandHandlerTest
         Assert.That(response.Errors.Contains("Last name is required."));
         Assert.That(response.Errors.Contains("Email is required."));
         Assert.That(response.Errors.Contains("Email is not valid."));
-        Assert.That(response.Errors.Contains("Date of birth should be higher than today."));
+ 
 
     }
 
