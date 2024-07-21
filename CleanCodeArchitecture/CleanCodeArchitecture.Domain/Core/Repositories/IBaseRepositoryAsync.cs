@@ -1,16 +1,16 @@
-﻿using CleanCodeArchitecture.Domain.Core.Entities;
+﻿using System.Linq.Expressions;
+using CleanCodeArchitecture.Domain.Core.Entities;
 using CleanCodeArchitecture.Domain.Core.Specifications;
 
 namespace CleanCodeArchitecture.Domain.Core.Repositories;
 
-public interface IBaseRepositoryAsync<T> where T : BaseEntity
+public interface IBaseRepositoryAsync<T> : IDisposable, IAsyncDisposable where T : BaseEntity 
 {
-    Task<T> GetByIdAsync(Guid id);
-    Task<IList<T>> ListAllAsync();
-    Task<IList<T>> ListAsync(ISpecification<T> spec);
-    Task<T?> FirstOrDefaultAsync(ISpecification<T?> spec);
+    Task<T?> GetByIdAsync(Guid id);
+    Task<IEnumerable<T>> ListAllAsync();
+    Task<IEnumerable<T>> ListAsync(Expression<Func<T, bool>> criteria);
+    Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> criteria);
     Task<T> AddAsync(T entity);
     void Update(T entity);
     void Delete(T entity);
-    Task<int> CountAsync(ISpecification<T> spec);
 }
