@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace POC.Domain
 {
@@ -29,6 +30,16 @@ namespace POC.Domain
         
         
         public T Value { get; set; }
+        
+        public string ValueString { get; set; }
+
+        public T ValueData
+        {
+            get { return string.IsNullOrEmpty(this.ValueString) ? null :  JsonConvert.DeserializeObject<T>(this.ValueString); }
+            set { this.ValueString = JsonConvert.SerializeObject(value); }
+        }
+        
+        
     }
 
     public class MainSettings : Settings<ApplicationSettingsData> 
@@ -42,12 +53,12 @@ namespace POC.Domain
 
     public class ModulePrimarySettings : Settings<ModulePrimarySettingsData>
     {
-        
+        //public virtual MainSettings MainSettings { get; set; }
     }
     
     public class ModuleSecondarySettings : Settings<ModuleSecondarySettingsData>
     {
-        
+        //public virtual MainSettings MainSettings { get; set; }
     }
     
     
