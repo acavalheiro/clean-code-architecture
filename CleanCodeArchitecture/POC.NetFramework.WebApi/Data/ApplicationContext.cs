@@ -19,13 +19,13 @@ namespace POC.NetFramework.WebApi.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<MainSettings>().HasKey(x => x.Id);
-            modelBuilder.Entity<MainSettings>().Ignore(x => x.Value);
+            //modelBuilder.Entity<MainSettings>().Ignore(x => x.Value);
             modelBuilder.Entity<MainSettings>().Ignore(x => x.ValueData);
 
             modelBuilder.Entity<MainSettings>().Property(x => x.ValueString).HasColumnName("Value");
 
             modelBuilder.Entity<ModulePrimarySettings>().HasKey(x => x.Id);
-            modelBuilder.Entity<ModulePrimarySettings>().Ignore(x => x.Value);
+            //modelBuilder.Entity<ModulePrimarySettings>().Ignore(x => x.Value);
             modelBuilder.Entity<ModulePrimarySettings>().Ignore(x => x.ValueData);
             modelBuilder.Entity<ModulePrimarySettings>().Property(x => x.ValueString).HasColumnName("Value");
 
@@ -36,7 +36,7 @@ namespace POC.NetFramework.WebApi.Data
 
             //modelBuilder.Entity<ModuleSecondarySettings>();
             modelBuilder.Entity<ModuleSecondarySettings>().HasKey(x => x.Id);
-            modelBuilder.Entity<ModuleSecondarySettings>().Ignore(x => x.Value);
+            //modelBuilder.Entity<ModuleSecondarySettings>().Ignore(x => x.Value);
             modelBuilder.Entity<ModuleSecondarySettings>().Ignore(x => x.ValueData);
             modelBuilder.Entity<ModuleSecondarySettings>().Property(x => x.ValueString).HasColumnName("Value");
 

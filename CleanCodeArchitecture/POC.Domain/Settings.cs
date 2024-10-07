@@ -27,10 +27,13 @@ namespace POC.Domain
     public abstract class Settings<T> where T : class
     {
         public int Id { get; set; }
-        
-        
+
+
+#if NET8
         public T Value { get; set; }
-        
+#endif
+
+#if NET48
         public string ValueString { get; set; }
 
         public T ValueData
@@ -38,7 +41,7 @@ namespace POC.Domain
             get { return string.IsNullOrEmpty(this.ValueString) ? null :  JsonConvert.DeserializeObject<T>(this.ValueString); }
             set { this.ValueString = JsonConvert.SerializeObject(value); }
         }
-        
+#endif
         
     }
 
