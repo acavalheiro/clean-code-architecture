@@ -8,6 +8,10 @@ public class ApplicationContext : DbContext
 {
     public DbSet<Person> Persons { get; set; }
 
+    public DbSet<Company> Companies { get; set; }
+
+    //public DbSet<MainSettings> MainSettings { get; set; }
+
     public ApplicationContext(DbContextOptions<ApplicationContext> options)
         : base(options)
     {
@@ -15,8 +19,12 @@ public class ApplicationContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Person>().ToTable("Persons");
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(CompanyEntityType).Assembly);
+
     }
+
 }

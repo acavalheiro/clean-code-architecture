@@ -5,5 +5,7 @@ namespace CleanCodeArchitecture.Domain.Repositories;
 
 public interface ICompanyRepository : IBaseRepositoryAsync<Company>
 {
-    
+    Task<Company> GetById(int id);
+
+    Task<Company> GetByIdWithSettings(int id);
 }

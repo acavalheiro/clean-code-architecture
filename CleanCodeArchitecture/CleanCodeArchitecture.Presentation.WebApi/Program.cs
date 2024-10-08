@@ -1,4 +1,5 @@
 using CleanCodeArchitecture.Infrastructure.Sql;
+using CleanCodeArchitecture.Application;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Abstractions;
@@ -24,6 +25,9 @@ namespace CleanCodeArchitecture.Presentation.WebApi
 
             // builder.Services.AddApplicationContext(builder.Configuration.GetConnectionString("AppConnectionString"));
             builder.Services.AddApplicationContextInMemory();
+
+            builder.Services.AddApplicationServices();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

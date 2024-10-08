@@ -4,6 +4,7 @@ using CleanCodeArchitecture.Infrastructure.Sql.Data;
 using CleanCodeArchitecture.Infrastructure.Sql.Repositories;
 using CleanCodeArchitecture.Infrastructure.Sql.Repositories.Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanCodeArchitecture.Infrastructure.Sql;
@@ -12,7 +13,6 @@ public static class Setup
 {
     public static IServiceCollection AddApplicationContext(this IServiceCollection services, string connectionString)
     {
-        
 
         services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(connectionString));
@@ -27,11 +27,13 @@ public static class Setup
 
 
         services.AddDbContext<ApplicationContext>(options =>
-            options.UseInMemoryDatabase("TestDatabase"));
+            options.UseInMemoryDatabase("TestDatabase")
+                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)));
 
         services.AddTransient<IUnitOfWork, UnitOfWork>();
 
         services.AddTransient<ICompanyRepository, CompanyRepository>();
+        services.AddTransient<IPersonRepository, PersonRepository>();
 
         return services;
     }

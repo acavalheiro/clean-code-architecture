@@ -6,6 +6,8 @@ namespace POC.DataTables.UI.Data
     public class ApplicationContext : DbContext
     {
         public DbSet<Models.Person> Persons { get; set; }
+
+
         
         public DbSet<MainSettings> MainSettings { get; set; }
         

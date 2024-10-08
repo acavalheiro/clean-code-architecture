@@ -32,7 +32,7 @@ namespace POC.DataTables.UI
             builder.Services.AddControllers();
 
             builder.Services.AddDbContext<Data.ApplicationContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnectionString")));
+                options.UseInMemoryDatabase("test"));
 
             var app = builder.Build();
 

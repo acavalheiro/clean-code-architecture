@@ -9,7 +9,7 @@ namespace CleanCodeArchitecture.Infrastructure.Sql.Repositories.Core;
 
 public abstract class BaseRepositoryAsync<T> : IBaseRepositoryAsync<T> where T : BaseEntity 
 {
-    private DbSet<T> DbSet { get; set; }
+    public DbSet<T> DbSet { get; internal set; }
 
     private readonly ApplicationContext _dbContext;
 
