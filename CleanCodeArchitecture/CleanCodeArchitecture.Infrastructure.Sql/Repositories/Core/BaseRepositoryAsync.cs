@@ -27,18 +27,18 @@ public abstract class BaseRepositoryAsync<T> : IBaseRepositoryAsync<T> where T :
         return await this.DbSet.FindAsync(id);
     }
 
-    public async Task<IEnumerable<T>> ListAllAsync()
+    public IEnumerable<T> ListAllAsync()
     {
-        return await this.DbSet.ToListAsync();
+        return  this.DbSet.AsEnumerable();
     }
 
-    public async Task<IEnumerable<T>> ListAsync(Expression<Func<T, bool>> criteria)
+    public IEnumerable<T> ListAsync(Expression<Func<T, bool>> criteria)
     {
         IQueryable<T> query = this.DbSet.AsQueryable();
 
         query = query.Where(criteria);
 
-        return await query.ToListAsync();
+        return query.AsEnumerable();
     }
 
     public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> criteria)

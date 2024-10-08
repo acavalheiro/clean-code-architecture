@@ -30,7 +30,7 @@ public class CreatePersonCommandHandler : ICommandHandler<CreatePersonCommand, D
 
         await _personRepository.AddAsync(person);
         //return new Domain.Entities.Person();
-        return new Result<Domain.Entities.Person>() { Data = person };
+        return person;
     }
 
 

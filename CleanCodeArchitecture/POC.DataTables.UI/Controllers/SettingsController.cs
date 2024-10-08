@@ -27,7 +27,19 @@ namespace POC.DataTables.UI.Controllers
             var settings = this._context.MainSettings.Include(x => x.ModulePrimarySettings).Include(x => x.ModuleSecondarySettings).AsEnumerable();
             return Ok(settings);
         }
-        
+
+        [HttpGet("Get/{id}")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var settings = await this._context.MainSettings.Include(x => x.ModulePrimarySettings)
+                .Include(x => x.ModuleSecondarySettings).FirstOrDefaultAsync(x => x.Guid == id);
+
+            if (settings is null)
+                return NotFound();
+
+            return Ok(settings);
+        }
+
         [HttpGet("SaveData")]
         public async Task<IActionResult> SaveData()
         {
