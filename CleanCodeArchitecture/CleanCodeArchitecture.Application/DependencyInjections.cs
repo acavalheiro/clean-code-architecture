@@ -7,7 +7,7 @@ namespace CleanCodeArchitecture.Application;
 
 public static class DependencyInjections
 {
-    public static IServiceCollection ConfigureServices(this IServiceCollection services)
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CleanCodeArchitecture.Application.DependencyInjections).Assembly));
         
