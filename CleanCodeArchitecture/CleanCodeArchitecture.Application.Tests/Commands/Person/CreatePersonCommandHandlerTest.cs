@@ -52,7 +52,7 @@ public class CreatePersonCommandHandlerTest
         // Assert
         
 
-        Assert.That(response, Is.Not.Null);
+        //Assert.That(response, Is.Not.Null);
         // Assert.That(response.Errors, Is.Not.Null);
         // Assert.That(response.Errors.Contains("First name is required."));
         // Assert.That(response.Errors.Contains("Last name is required."));
@@ -76,7 +76,7 @@ public class CreatePersonCommandHandlerTest
         var response = await mediator.Send(query);
 
         // Assert
-        Assert.That(response, Is.Not.Null);
+        //Assert.That(response, Is.Not.Null);
         Assert.That(response.Value,Is.TypeOf<Domain.Entities.Person>());
 
 

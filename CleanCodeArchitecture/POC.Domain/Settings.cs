@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
 namespace POC.Domain
@@ -26,7 +27,7 @@ namespace POC.Domain
     
     public abstract class Settings<T> where T : class
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
 
 #if NET8
@@ -45,13 +46,15 @@ namespace POC.Domain
         
     }
 
-    public class MainSettings : Settings<ApplicationSettingsData> 
+    public class MainSettings : Settings<ApplicationSettingsData>
     {
+        public string id => this.guid.ToString();
         public Guid Guid { get; set; }
-        
-        public ModulePrimarySettings ModulePrimarySettings { get; set; }
-        
-        public ModuleSecondarySettings ModuleSecondarySettings { get; set; }
+
+        public Guid guid { get; set; } = Guid.NewGuid();
+        public ModulePrimarySettings ModulePrimarySettings { get; set; } = new ModulePrimarySettings();
+
+        public ModuleSecondarySettings ModuleSecondarySettings { get; set; } = new ModuleSecondarySettings();
     }
 
     public class ModulePrimarySettings : Settings<ModulePrimarySettingsData>
